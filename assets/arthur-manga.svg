@@ -1,0 +1,73 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 520 680' role='img' aria-labelledby='title desc'>
+  <title id='title'>Arthur Escudo em estilo manga</title>
+  <desc id='desc'>Personagem original inspirado por referencias de cabelo cacheado, moletom verde e energia curiosa.</desc>
+  <defs>
+    <pattern id='dots' width='20' height='20' patternUnits='userSpaceOnUse'>
+      <circle cx='5' cy='5' r='2.2' fill='#101010' opacity='.2'/>
+    </pattern>
+    <radialGradient id='shield' cx='.48' cy='.44' r='.58'>
+      <stop offset='0' stop-color='#fffaf0'/>
+      <stop offset='.46' stop-color='#36d8e8'/>
+      <stop offset='1' stop-color='#64d96b'/>
+    </radialGradient>
+    <filter id='rough'>
+      <feTurbulence type='fractalNoise' baseFrequency='.016' numOctaves='2' result='noise'/>
+      <feDisplacementMap in='SourceGraphic' in2='noise' scale='2'/>
+    </filter>
+  </defs>
+  <rect width='520' height='680' fill='#fffaf0'/>
+  <rect width='520' height='680' fill='url(#dots)'/>
+  <g stroke='#101010' stroke-width='7' stroke-linecap='square' opacity='.82'>
+    <path d='M40 92 205 228'/>
+    <path d='M18 302 202 280'/>
+    <path d='M55 500 210 336'/>
+    <path d='M480 92 318 228'/>
+    <path d='M498 312 318 282'/>
+    <path d='M458 524 307 336'/>
+  </g>
+  <path d='M260 42 C369 70 454 159 454 282 C454 456 340 576 260 628 C180 576 66 456 66 282 C66 159 151 70 260 42Z' fill='url(#shield)' stroke='#101010' stroke-width='10' filter='url(#rough)'/>
+  <path d='M126 150 C170 206 205 242 260 262 C315 242 350 206 394 150' fill='none' stroke='#101010' stroke-width='7' opacity='.42'/>
+  <path d='M109 408 C163 356 207 333 260 326 C313 333 357 356 411 408' fill='none' stroke='#101010' stroke-width='7' opacity='.36'/>
+  <g transform='translate(104 120)' stroke='#101010' stroke-width='8' stroke-linejoin='round' stroke-linecap='round'>
+    <path d='M174 332 143 470 180 470 212 350Z' fill='#333333'/>
+    <path d='M222 350 251 470 291 470 262 332Z' fill='#333333'/>
+    <path d='M130 470 188 470 194 492 119 492Z' fill='#64d96b'/>
+    <path d='M242 470 301 470 316 492 238 492Z' fill='#64d96b'/>
+    <path d='M120 198 C153 160 250 160 286 198 L309 342 C258 374 165 374 96 342Z' fill='#60704d'/>
+    <path d='M156 182 C176 210 235 211 256 182' fill='none' opacity='.55'/>
+    <path d='M116 218 62 288 37 264 88 200Z' fill='#60704d'/>
+    <path d='M58 288 32 323 9 304 37 264Z' fill='#f2c09a'/>
+    <path d='M286 218 344 286 369 262 314 200Z' fill='#60704d'/>
+    <path d='M345 286 380 315 399 292 369 262Z' fill='#f2c09a'/>
+    <path d='M145 66 C150 23 183 1 225 8 C270 16 296 46 292 88 C287 139 249 166 204 166 C161 166 140 117 145 66Z' fill='#f2c09a'/>
+    <g fill='#101010'>
+      <circle cx='151' cy='62' r='26'/>
+      <circle cx='174' cy='31' r='26'/>
+      <circle cx='211' cy='18' r='28'/>
+      <circle cx='249' cy='30' r='27'/>
+      <circle cx='278' cy='62' r='28'/>
+      <circle cx='137' cy='94' r='23'/>
+      <circle cx='288' cy='101' r='23'/>
+    </g>
+    <path d='M170 96 Q187 84 205 96' fill='none'/>
+    <path d='M229 96 Q246 84 264 96' fill='none'/>
+    <path d='M208 131 Q225 144 246 129' fill='none'/>
+    <path d='M100 248 C144 286 257 287 306 246' fill='none' opacity='.3'/>
+    <g transform='translate(222 257)'>
+      <rect x='0' y='0' width='90' height='70' rx='14' fill='#fffaf0'/>
+      <path d='M20 36 H70 M45 14 V58' fill='none'/>
+      <circle cx='68' cy='20' r='6' fill='#e6222e'/>
+      <circle cx='68' cy='48' r='6' fill='#36d8e8'/>
+    </g>
+  </g>
+  <g fill='none' stroke='#101010' stroke-width='7' stroke-linecap='round'>
+    <path d='M128 196 C84 175 71 136 92 96'/>
+    <path d='M392 196 C436 175 449 136 428 96'/>
+    <path d='M110 462 C70 488 58 540 89 584'/>
+    <path d='M410 462 C450 488 462 540 431 584'/>
+  </g>
+  <g font-family='Impact, Arial Black, sans-serif' font-weight='900' letter-spacing='0'>
+    <text x='36' y='86' font-size='62' fill='#36d8e8' stroke='#101010' stroke-width='5' paint-order='stroke'>ARTHUR</text>
+    <text x='284' y='632' font-size='44' fill='#64d96b' stroke='#101010' stroke-width='6' paint-order='stroke' transform='rotate(6 284 632)'>ESCUDO!</text>
+  </g>
+</svg>
