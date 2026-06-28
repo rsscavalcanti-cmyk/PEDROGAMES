@@ -1,0 +1,66 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 520 680' role='img' aria-labelledby='title desc'>
+  <title id='title'>Pedro Raio em estilo manga</title>
+  <desc id='desc'>Personagem original inspirado por referencias de aventura, camiseta vermelha e pose de acao.</desc>
+  <defs>
+    <pattern id='dots' width='18' height='18' patternUnits='userSpaceOnUse'>
+      <circle cx='4' cy='4' r='2.1' fill='#101010' opacity='.22'/>
+    </pattern>
+    <linearGradient id='water' x1='0' x2='1'>
+      <stop offset='0' stop-color='#36d8e8'/>
+      <stop offset='.52' stop-color='#4fb0ff'/>
+      <stop offset='1' stop-color='#ffe066'/>
+    </linearGradient>
+    <filter id='rough'>
+      <feTurbulence type='fractalNoise' baseFrequency='.018' numOctaves='2' result='noise'/>
+      <feDisplacementMap in='SourceGraphic' in2='noise' scale='2'/>
+    </filter>
+  </defs>
+  <rect width='520' height='680' fill='#fffaf0'/>
+  <rect width='520' height='680' fill='url(#dots)'/>
+  <path d='M260 24 291 170 420 83 338 218 495 239 340 279 432 424 291 336 260 514 228 336 87 424 180 279 25 239 182 218 100 83 229 170Z' fill='#ffd34d' stroke='#101010' stroke-width='9' filter='url(#rough)'/>
+  <g stroke='#101010' stroke-width='6' stroke-linecap='square' opacity='.9'>
+    <path d='M38 120 205 248'/>
+    <path d='M26 240 192 270'/>
+    <path d='M52 405 206 314'/>
+    <path d='M486 126 325 245'/>
+    <path d='M496 360 329 302'/>
+    <path d='M448 512 309 347'/>
+  </g>
+  <g transform='translate(0 506)'>
+    <path d='M0 62 C78 34 129 84 202 46 C279 6 338 68 520 30 L520 174 L0 174Z' fill='url(#water)' stroke='#101010' stroke-width='7'/>
+    <g fill='#101010' opacity='.68'>
+      <rect x='308' y='-12' width='22' height='58'/>
+      <rect x='340' y='-34' width='32' height='80'/>
+      <rect x='384' y='-18' width='26' height='64'/>
+      <rect x='424' y='-46' width='34' height='92'/>
+      <rect x='472' y='-20' width='20' height='66'/>
+    </g>
+  </g>
+  <g transform='translate(88 114)' stroke='#101010' stroke-width='8' stroke-linejoin='round' stroke-linecap='round'>
+    <path d='M172 300 126 472 168 472 205 338Z' fill='#1f3158'/>
+    <path d='M232 300 284 472 324 472 267 338Z' fill='#1f3158'/>
+    <path d='M116 472 176 472 181 492 103 492Z' fill='#e6222e'/>
+    <path d='M270 472 333 472 350 492 264 492Z' fill='#e6222e'/>
+    <path d='M126 174 278 174 302 316 104 316Z' fill='#e6222e'/>
+    <path d='M118 188 32 234 8 213 104 143Z' fill='#f2c09a'/>
+    <path d='M32 234 -28 238 -20 213 8 213Z' fill='#f2c09a'/>
+    <path d='M270 186 334 142 345 178 297 236Z' fill='#f2c09a'/>
+    <path d='M331 145 372 100 391 129 346 180Z' fill='#f2c09a'/>
+    <path d='M139 57 C145 16 178 -2 220 6 C267 16 291 48 287 91 C282 145 247 174 201 174 C157 174 133 126 139 57Z' fill='#f2c09a'/>
+    <path d='M134 64 C150 20 190 -16 242 10 C246 43 222 55 199 55 C181 55 167 63 154 84 C145 82 138 75 134 64Z' fill='#101010'/>
+    <path d='M163 18 125 52 174 42 203 0 229 47 269 20 262 72 296 72 282 101' fill='#101010'/>
+    <path d='M177 99 Q194 88 211 99' fill='none'/>
+    <path d='M231 98 Q246 88 262 98' fill='none'/>
+    <path d='M208 137 Q226 150 246 135' fill='none'/>
+    <path d='M110 190 282 190' fill='none' opacity='.28'/>
+    <path d='M120 234 292 234' fill='none' opacity='.18'/>
+    <path d='M59 219 8 213' fill='none'/>
+    <path d='M383 115 Q398 92 378 76' fill='none'/>
+    <circle cx='286' cy='105' r='10' fill='#101010'/>
+    <path d='M286 105 C314 74 356 78 374 103' fill='none'/>
+  </g>
+  <g font-family='Impact, Arial Black, sans-serif' font-weight='900' letter-spacing='0'>
+    <text x='32' y='84' font-size='64' fill='#e6222e' stroke='#101010' stroke-width='5' paint-order='stroke'>PEDRO</text>
+    <text x='306' y='632' font-size='48' fill='#fffaf0' stroke='#101010' stroke-width='6' paint-order='stroke' transform='rotate(-6 306 632)'>RAIO!</text>
+  </g>
+</svg>
