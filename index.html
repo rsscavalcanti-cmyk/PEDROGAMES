@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PEDROGAMES</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="PEDROGAMES inicio">
+      <span class="brand-mark" aria-hidden="true">PG</span>
+      <span>PEDROGAMES</span>
+    </a>
+    <nav class="nav" aria-label="Navegacao principal">
+      <a href="#demo">Demo</a>
+      <a href="#jogos">Jogos</a>
+      <a href="#ranking">Ranking</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="stage" aria-labelledby="page-title">
+      <div class="intro">
+        <p class="eyebrow">Novo hub de jogos</p>
+        <h1 id="page-title">PEDROGAMES</h1>
+        <p class="lead">Um espaco para jogos rapidos, desafios de reflexo e placares da turma.</p>
+        <div class="actions">
+          <a class="primary-action" href="#demo">Jogar agora</a>
+          <a class="secondary-action" href="#jogos">Ver jogos</a>
+        </div>
+      </div>
+
+      <section class="arcade" id="demo" aria-labelledby="demo-title">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Demo jogavel</p>
+            <h2 id="demo-title">Reflexo Turbo</h2>
+          </div>
+          <button class="start-button" type="button" id="startGame">Iniciar</button>
+        </div>
+
+        <div class="scorebar" aria-live="polite">
+          <span>Tempo: <strong id="timeLeft">20</strong>s</span>
+          <span>Pontos: <strong id="score">0</strong></span>
+          <span>Recorde: <strong id="bestScore">0</strong></span>
+        </div>
+
+        <div class="game-grid" id="gameGrid" aria-label="Tabuleiro do jogo Reflexo Turbo"></div>
+        <p class="game-status" id="gameStatus">Clique em Iniciar e acerte os quadrados acesos.</p>
+      </section>
+    </section>
+
+    <section class="games" id="jogos" aria-labelledby="games-title">
+      <div class="section-title">
+        <p class="eyebrow">Biblioteca</p>
+        <h2 id="games-title">Jogos em destaque</h2>
+      </div>
+
+      <div class="game-list">
+        <article class="game-card">
+          <div class="game-art maze" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <h3>Labirinto Neon</h3>
+          <p>Desvie dos blocos e encontre a saida antes do tempo acabar.</p>
+          <span class="tag">Em breve</span>
+        </article>
+
+        <article class="game-card">
+          <div class="game-art race" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+          <h3>Corrida Pixel</h3>
+          <p>Acelere, freie na hora certa e tente bater o melhor tempo.</p>
+          <span class="tag live">Planejado</span>
+        </article>
+
+        <article class="game-card">
+          <div class="game-art tower" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <h3>Guardiao da Torre</h3>
+          <p>Proteja sua base com estrategia e upgrades a cada rodada.</p>
+          <span class="tag">Em breve</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="ranking" id="ranking" aria-labelledby="ranking-title">
+      <div class="section-title">
+        <p class="eyebrow">Placar</p>
+        <h2 id="ranking-title">Ranking local</h2>
+      </div>
+      <ol class="ranking-list">
+        <li><span>Pedro</span><strong>1200</strong></li>
+        <li><span>Convidado</span><strong>850</strong></li>
+        <li><span>Voce</span><strong id="rankingScore">0</strong></li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>PEDROGAMES</span>
+    <a href="https://github.com/rsscavalcanti-cmyk/PEDROGAMES">Repositorio no GitHub</a>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
