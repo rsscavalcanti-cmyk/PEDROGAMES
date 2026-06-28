@@ -1,22 +1,38 @@
-const gameTitle = document.querySelector("#arcade-title");
-const primaryAction = document.querySelector("#primaryAction");
-const tabButtons = Array.from(document.querySelectorAll(".tab-button"));
-const cardButtons = Array.from(document.querySelectorAll(".game-card-action"));
-const screens = Array.from(document.querySelectorAll(".game-screen"));
-const metricOneLabel = document.querySelector("#metricOneLabel");
-const metricTwoLabel = document.querySelector("#metricTwoLabel");
-const metricOne = document.querySelector("#metricOne");
-const metricTwo = document.querySelector("#metricTwo");
-const bestOutput = document.querySelector("#bestScore");
-const statusOutput = document.querySelector("#gameStatus");
-const rankReflex = document.querySelector("#rankReflex");
-const rankMemory = document.querySelector("#rankMemory");
-const rankDash = document.querySelector("#rankDash");
+const gameTitle = document.querySelector('#arcade-title');
+const primaryAction = document.querySelector('#primaryAction');
+const tabButtons = Array.from(document.querySelectorAll('.tab-button'));
+const cardButtons = Array.from(document.querySelectorAll('.game-card-action'));
+const heroButtons = Array.from(document.querySelectorAll('[data-hero]'));
+const heroBadge = document.querySelector('#heroBadge');
+const screens = Array.from(document.querySelectorAll('.game-screen'));
+const metricOneLabel = document.querySelector('#metricOneLabel');
+const metricTwoLabel = document.querySelector('#metricTwoLabel');
+const metricOne = document.querySelector('#metricOne');
+const metricTwo = document.querySelector('#metricTwo');
+const bestOutput = document.querySelector('#bestScore');
+const statusOutput = document.querySelector('#gameStatus');
+const rankReflex = document.querySelector('#rankReflex');
+const rankMemory = document.querySelector('#rankMemory');
+const rankDash = document.querySelector('#rankDash');
 
 const storageKeys = {
-  reflex: "pedrogames-best-reflex",
-  memory: "pedrogames-best-memory",
-  dash: "pedrogames-best-dash"
+  reflex: 'pedrogames-best-reflex',
+  memory: 'pedrogames-best-memory',
+  dash: 'pedrogames-best-dash',
+  hero: 'pedrogames-selected-hero'
+};
+
+const heroProfiles = {
+  pedro: {
+    name: 'Pedro Raio',
+    ship: '#e6222e',
+    accent: '#ffd34d'
+  },
+  arthur: {
+    name: 'Arthur Escudo',
+    ship: '#60704d',
+    accent: '#36d8e8'
+  }
 };
 
 const records = {
@@ -25,11 +41,16 @@ const records = {
   dash: Number(localStorage.getItem(storageKeys.dash) || 0)
 };
 
-let currentGame = "";
+let currentGame = '';
+let selectedHero = localStorage.getItem(storageKeys.hero) || 'pedro';
 
-function setRecord(game, value, mode = "high") {
+function getHeroProfile() {
+  return heroProfiles[selectedHero] || heroProfiles.pedro;
+}
+
+function setRecord(game, value, mode = 'high') {
   const current = records[game] || 0;
-  const isBetter = mode === "low" ? current === 0 || value < current : value > current;
+  const isBetter = mode === 'low' ? current === 0 || value < current : value > current;
 
   if (!isBetter) {
     return;
@@ -42,9 +63,9 @@ function setRecord(game, value, mode = "high") {
 
 function updateRecordOutputs() {
   rankReflex.textContent = records.reflex;
-  rankMemory.textContent = records.memory === 0 ? "0" : `${records.memory} jogadas`;
+  rankMemory.textContent = records.memory === 0 ? '0' : `${records.memory} jogadas`;
   rankDash.textContent = records.dash;
-  bestOutput.textContent = currentGame === "memory" && records.memory > 0
+  bestOutput.textContent = currentGame === 'memory' && records.memory > 0
     ? `${records.memory} jogadas`
     : records[currentGame];
 }
@@ -77,13 +98,13 @@ function selectGame(game) {
   const config = games[game];
 
   tabButtons.forEach((button) => {
-    button.classList.toggle("active", button.dataset.game === game);
+    button.classList.toggle('active', button.dataset.game === game);
   });
 
   screens.forEach((screen) => {
     const isActive = screen.dataset.screen === game;
     screen.hidden = !isActive;
-    screen.classList.toggle("active", isActive);
+    screen.classList.toggle('active', isActive);
   });
 
   if (!isSameGame) {
@@ -94,11 +115,11 @@ function selectGame(game) {
   }
 
   updateRecordOutputs();
-  document.querySelector("#arcade").scrollIntoView({ behavior: "smooth", block: "start" });
+  document.querySelector('#arcade').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 const reflex = (() => {
-  const grid = document.querySelector("#reflexGrid");
+  const grid = document.querySelector('#reflexGrid');
   const totalCells = 16;
   let cells = [];
   let activeIndex = -1;
@@ -115,20 +136,20 @@ const reflex = (() => {
     const fragment = document.createDocumentFragment();
 
     for (let index = 0; index < totalCells; index += 1) {
-      const cell = document.createElement("button");
-      cell.type = "button";
-      cell.className = "cell";
-      cell.setAttribute("aria-label", `Casa ${index + 1}`);
-      cell.addEventListener("click", () => handleCellClick(index));
+      const cell = document.createElement('button');
+      cell.type = 'button';
+      cell.className = 'cell';
+      cell.setAttribute('aria-label', `Casa ${index + 1}`);
+      cell.addEventListener('click', () => handleCellClick(index));
       fragment.appendChild(cell);
     }
 
     grid.appendChild(fragment);
-    cells = Array.from(grid.querySelectorAll(".cell"));
+    cells = Array.from(grid.querySelectorAll('.cell'));
   }
 
   function setActiveCell() {
-    cells.forEach((cell) => cell.classList.remove("active", "hit"));
+    cells.forEach((cell) => cell.classList.remove('active', 'hit'));
 
     let nextIndex = Math.floor(Math.random() * totalCells);
     if (nextIndex === activeIndex) {
@@ -136,42 +157,42 @@ const reflex = (() => {
     }
 
     activeIndex = nextIndex;
-    cells[activeIndex].classList.add("active");
+    cells[activeIndex].classList.add('active');
   }
 
   function updateScore(nextScore) {
     score = nextScore;
-    setMetrics("Tempo: ", timeLeft, "Pontos: ", score);
-    setRecord("reflex", score);
+    setMetrics('Tempo: ', timeLeft, 'Pontos: ', score);
+    setRecord('reflex', score);
   }
 
-  function stop(message = "Pronto para outra rodada.") {
+  function stop(message = 'Pronto para outra rodada.') {
     window.clearInterval(timer);
     timer = null;
     isRunning = false;
     activeIndex = -1;
-    cells.forEach((cell) => cell.classList.remove("active", "hit"));
+    cells.forEach((cell) => cell.classList.remove('active', 'hit'));
 
-    if (currentGame === "reflex") {
-      primaryAction.textContent = "Iniciar";
-      setMetrics("Tempo: ", timeLeft, "Pontos: ", score);
+    if (currentGame === 'reflex') {
+      primaryAction.textContent = 'Iniciar';
+      setMetrics('Tempo: ', timeLeft, 'Pontos: ', score);
       setStatus(message);
     }
   }
 
   function start() {
-    stop("");
+    stop('');
     isRunning = true;
     score = 0;
     timeLeft = 20;
-    setMetrics("Tempo: ", timeLeft, "Pontos: ", score);
-    primaryAction.textContent = "Reiniciar";
-    setStatus("Rodada ativa.");
+    setMetrics('Tempo: ', timeLeft, 'Pontos: ', score);
+    primaryAction.textContent = 'Reiniciar';
+    setStatus(`${getHeroProfile().name} entrou no Reflexo Turbo.`);
     setActiveCell();
 
     timer = window.setInterval(() => {
       timeLeft -= 1;
-      setMetrics("Tempo: ", timeLeft, "Pontos: ", score);
+      setMetrics('Tempo: ', timeLeft, 'Pontos: ', score);
 
       if (timeLeft <= 0) {
         stop(`Fim de rodada. Pontuacao: ${score}.`);
@@ -181,41 +202,41 @@ const reflex = (() => {
 
   function handleCellClick(index) {
     if (!isRunning) {
-      setStatus("Pronto para iniciar.");
+      setStatus('Pronto para iniciar.');
       return;
     }
 
     if (index !== activeIndex) {
-      setStatus("Tente o quadrado aceso.");
+      setStatus('Tente o quadrado aceso.');
       return;
     }
 
-    cells[index].classList.remove("active");
-    cells[index].classList.add("hit");
+    cells[index].classList.remove('active');
+    cells[index].classList.add('hit');
     updateScore(score + 100);
-    setStatus("Boa.");
+    setStatus('Boa.');
     window.setTimeout(setActiveCell, 120);
   }
 
   function prepare() {
     createGrid();
-    setMetrics("Tempo: ", timeLeft, "Pontos: ", score);
+    setMetrics('Tempo: ', timeLeft, 'Pontos: ', score);
   }
 
   return { prepare, start, stop };
 })();
 
 const memory = (() => {
-  const grid = document.querySelector("#memoryGrid");
+  const grid = document.querySelector('#memoryGrid');
   const baseCards = [
-    { label: "A", color: "#ffd166" },
-    { label: "B", color: "#3fd4e0" },
-    { label: "C", color: "#ff6b6b" },
-    { label: "D", color: "#78d66d" },
-    { label: "E", color: "#a78bfa" },
-    { label: "F", color: "#fca5a5" },
-    { label: "G", color: "#86efac" },
-    { label: "H", color: "#fcd34d" }
+    { label: 'A', color: '#ffd166' },
+    { label: 'B', color: '#3fd4e0' },
+    { label: 'C', color: '#ff6b6b' },
+    { label: 'D', color: '#78d66d' },
+    { label: 'E', color: '#a78bfa' },
+    { label: 'F', color: '#fca5a5' },
+    { label: 'G', color: '#86efac' },
+    { label: 'H', color: '#fcd34d' }
   ];
   let cards = [];
   let revealed = [];
@@ -232,18 +253,18 @@ const memory = (() => {
   }
 
   function createGrid() {
-    grid.innerHTML = "";
+    grid.innerHTML = '';
     cards = shuffle([...baseCards, ...baseCards]).map((card, index) => ({ ...card, id: index }));
     const fragment = document.createDocumentFragment();
 
     cards.forEach((card, index) => {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "memory-card";
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'memory-card';
       button.textContent = card.label;
-      button.style.setProperty("--card-color", card.color);
-      button.setAttribute("aria-label", `Carta ${index + 1}`);
-      button.addEventListener("click", () => revealCard(index));
+      button.style.setProperty('--card-color', card.color);
+      button.setAttribute('aria-label', `Carta ${index + 1}`);
+      button.addEventListener('click', () => revealCard(index));
       fragment.appendChild(button);
     });
 
@@ -257,19 +278,19 @@ const memory = (() => {
     started = true;
     revealed = [];
     createGrid();
-    primaryAction.textContent = "Reiniciar";
-    setMetrics("Pares: ", matched, "Jogadas: ", moves);
-    setStatus("Rodada ativa.");
+    primaryAction.textContent = 'Reiniciar';
+    setMetrics('Pares: ', matched, 'Jogadas: ', moves);
+    setStatus(`${getHeroProfile().name} abriu a Memoria Pixel.`);
   }
 
-  function stop(message = "Pronto para jogar.") {
+  function stop(message = 'Pronto para jogar.') {
     locked = false;
     started = false;
     revealed = [];
 
-    if (currentGame === "memory") {
-      primaryAction.textContent = "Iniciar";
-      setMetrics("Pares: ", matched, "Jogadas: ", moves);
+    if (currentGame === 'memory') {
+      primaryAction.textContent = 'Iniciar';
+      setMetrics('Pares: ', matched, 'Jogadas: ', moves);
       setStatus(message);
     }
   }
@@ -285,11 +306,11 @@ const memory = (() => {
     }
 
     const button = grid.children[index];
-    if (!button || button.classList.contains("revealed") || button.classList.contains("matched")) {
+    if (!button || button.classList.contains('revealed') || button.classList.contains('matched')) {
       return;
     }
 
-    button.classList.add("revealed");
+    button.classList.add('revealed');
     revealed.push({ index, label: cards[index].label });
 
     if (revealed.length < 2) {
@@ -297,18 +318,18 @@ const memory = (() => {
     }
 
     moves += 1;
-    setMetrics("Pares: ", matched, "Jogadas: ", moves);
+    setMetrics('Pares: ', matched, 'Jogadas: ', moves);
 
     const [first, second] = revealed;
     if (first.label === second.label) {
-      grid.children[first.index].classList.add("matched");
-      grid.children[second.index].classList.add("matched");
+      grid.children[first.index].classList.add('matched');
+      grid.children[second.index].classList.add('matched');
       revealed = [];
       matched += 1;
-      setMetrics("Pares: ", matched, "Jogadas: ", moves);
+      setMetrics('Pares: ', matched, 'Jogadas: ', moves);
 
       if (matched === baseCards.length) {
-        setRecord("memory", moves, "low");
+        setRecord('memory', moves, 'low');
         stop(`Jogo completo em ${moves} jogadas.`);
       }
       return;
@@ -316,8 +337,8 @@ const memory = (() => {
 
     locked = true;
     window.setTimeout(() => {
-      grid.children[first.index].classList.remove("revealed");
-      grid.children[second.index].classList.remove("revealed");
+      grid.children[first.index].classList.remove('revealed');
+      grid.children[second.index].classList.remove('revealed');
       revealed = [];
       locked = false;
     }, 650);
@@ -327,16 +348,16 @@ const memory = (() => {
     if (grid.children.length === 0) {
       createGrid();
     }
-    setMetrics("Pares: ", matched, "Jogadas: ", moves);
+    setMetrics('Pares: ', matched, 'Jogadas: ', moves);
   }
 
   return { prepare, start, stop };
 })();
 
 const dash = (() => {
-  const canvas = document.querySelector("#dashCanvas");
-  const context = canvas.getContext("2d");
-  const controls = Array.from(document.querySelectorAll("[data-move]"));
+  const canvas = document.querySelector('#dashCanvas');
+  const context = canvas.getContext('2d');
+  const controls = Array.from(document.querySelectorAll('[data-move]'));
   const player = { x: 300, y: 360, width: 48, height: 24, speed: 7 };
   const keys = { left: false, right: false };
   let obstacles = [];
@@ -348,9 +369,9 @@ const dash = (() => {
   let running = false;
 
   function drawBackground() {
-    context.fillStyle = "#0f1317";
+    context.fillStyle = '#0f1317';
     context.fillRect(0, 0, canvas.width, canvas.height);
-    context.strokeStyle = "rgba(63, 212, 224, 0.12)";
+    context.strokeStyle = 'rgba(63, 212, 224, 0.12)';
     context.lineWidth = 1;
 
     for (let x = 40; x < canvas.width; x += 80) {
@@ -362,20 +383,23 @@ const dash = (() => {
   }
 
   function drawPlayer() {
-    context.fillStyle = "#3fd4e0";
+    const hero = getHeroProfile();
+    context.fillStyle = hero.ship;
     context.fillRect(player.x, player.y, player.width, player.height);
-    context.fillStyle = "#ffd166";
+    context.fillStyle = hero.accent;
     context.fillRect(player.x + 14, player.y - 10, 20, 10);
+    context.fillStyle = '#101010';
+    context.fillRect(player.x + 6, player.y + 6, 36, 5);
   }
 
   function drawItems() {
     obstacles.forEach((obstacle) => {
-      context.fillStyle = "#ff6b6b";
+      context.fillStyle = '#ff6b6b';
       context.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
     });
 
     energy.forEach((item) => {
-      context.fillStyle = "#ffd166";
+      context.fillStyle = getHeroProfile().accent;
       context.beginPath();
       context.arc(item.x, item.y, item.radius, 0, Math.PI * 2);
       context.fill();
@@ -385,10 +409,10 @@ const dash = (() => {
   function drawIdle() {
     drawBackground();
     drawPlayer();
-    context.fillStyle = "rgba(247, 247, 242, 0.72)";
-    context.font = "700 24px system-ui, sans-serif";
-    context.textAlign = "center";
-    context.fillText("METEORO DASH", canvas.width / 2, 130);
+    context.fillStyle = 'rgba(247, 247, 242, 0.72)';
+    context.font = '700 24px system-ui, sans-serif';
+    context.textAlign = 'center';
+    context.fillText('METEORO DASH', canvas.width / 2, 130);
   }
 
   function reset() {
@@ -398,7 +422,7 @@ const dash = (() => {
     score = 0;
     lives = 3;
     frame = 0;
-    setMetrics("Vidas: ", lives, "Pontos: ", score);
+    setMetrics('Vidas: ', lives, 'Pontos: ', score);
     drawIdle();
   }
 
@@ -469,14 +493,14 @@ const dash = (() => {
     obstacles = obstacles.filter((obstacle) => {
       if (intersectsRect(player, obstacle)) {
         lives -= 1;
-        setMetrics("Vidas: ", lives, "Pontos: ", score);
+        setMetrics('Vidas: ', lives, 'Pontos: ', score);
         return false;
       }
 
       if (obstacle.y > canvas.height) {
         score += 25;
-        setRecord("dash", score);
-        setMetrics("Vidas: ", lives, "Pontos: ", score);
+        setRecord('dash', score);
+        setMetrics('Vidas: ', lives, 'Pontos: ', score);
         return false;
       }
 
@@ -486,8 +510,8 @@ const dash = (() => {
     energy = energy.filter((item) => {
       if (intersectsCircle(player, item)) {
         score += 100;
-        setRecord("dash", score);
-        setMetrics("Vidas: ", lives, "Pontos: ", score);
+        setRecord('dash', score);
+        setMetrics('Vidas: ', lives, 'Pontos: ', score);
         return false;
       }
 
@@ -514,23 +538,23 @@ const dash = (() => {
   }
 
   function start() {
-    stop("");
+    stop('');
     reset();
     running = true;
-    primaryAction.textContent = "Reiniciar";
-    setStatus("Partida ativa.");
+    primaryAction.textContent = 'Reiniciar';
+    setStatus(`${getHeroProfile().name} entrou no Meteoro Dash.`);
     animationId = window.requestAnimationFrame(loop);
   }
 
-  function stop(message = "Pronto para jogar.") {
+  function stop(message = 'Pronto para jogar.') {
     running = false;
     window.cancelAnimationFrame(animationId);
     animationId = null;
     keys.left = false;
     keys.right = false;
 
-    if (currentGame === "dash") {
-      primaryAction.textContent = "Iniciar";
+    if (currentGame === 'dash') {
+      primaryAction.textContent = 'Iniciar';
       setStatus(message);
       drawIdle();
     }
@@ -540,28 +564,28 @@ const dash = (() => {
     reset();
   }
 
-  window.addEventListener("keydown", (event) => {
-    if (currentGame !== "dash") {
+  window.addEventListener('keydown', (event) => {
+    if (currentGame !== 'dash') {
       return;
     }
 
-    if (event.key === "ArrowLeft" || event.key.toLowerCase() === "a") {
+    if (event.key === 'ArrowLeft' || event.key.toLowerCase() === 'a') {
       keys.left = true;
       event.preventDefault();
     }
 
-    if (event.key === "ArrowRight" || event.key.toLowerCase() === "d") {
+    if (event.key === 'ArrowRight' || event.key.toLowerCase() === 'd') {
       keys.right = true;
       event.preventDefault();
     }
   });
 
-  window.addEventListener("keyup", (event) => {
-    if (event.key === "ArrowLeft" || event.key.toLowerCase() === "a") {
+  window.addEventListener('keyup', (event) => {
+    if (event.key === 'ArrowLeft' || event.key.toLowerCase() === 'a') {
       keys.left = false;
     }
 
-    if (event.key === "ArrowRight" || event.key.toLowerCase() === "d") {
+    if (event.key === 'ArrowRight' || event.key.toLowerCase() === 'd') {
       keys.right = false;
     }
   });
@@ -572,10 +596,10 @@ const dash = (() => {
       keys[move] = value;
     };
 
-    button.addEventListener("pointerdown", () => setMove(true));
-    button.addEventListener("pointerup", () => setMove(false));
-    button.addEventListener("pointerleave", () => setMove(false));
-    button.addEventListener("pointercancel", () => setMove(false));
+    button.addEventListener('pointerdown', () => setMove(true));
+    button.addEventListener('pointerup', () => setMove(false));
+    button.addEventListener('pointerleave', () => setMove(false));
+    button.addEventListener('pointercancel', () => setMove(false));
   });
 
   return { prepare, start, stop };
@@ -583,38 +607,67 @@ const dash = (() => {
 
 const games = {
   reflex: {
-    title: "Reflexo Turbo",
-    action: "Iniciar",
-    status: "Pronto para jogar.",
+    title: 'Reflexo Turbo',
+    action: 'Iniciar',
+    status: 'Pronto para jogar.',
     prepare: reflex.prepare,
     start: reflex.start
   },
   memory: {
-    title: "Memoria Pixel",
-    action: "Iniciar",
-    status: "Pronto para jogar.",
+    title: 'Memoria Pixel',
+    action: 'Iniciar',
+    status: 'Pronto para jogar.',
     prepare: memory.prepare,
     start: memory.start
   },
   dash: {
-    title: "Meteoro Dash",
-    action: "Iniciar",
-    status: "Pronto para jogar.",
+    title: 'Meteoro Dash',
+    action: 'Iniciar',
+    status: 'Pronto para jogar.',
     prepare: dash.prepare,
     start: dash.start
   }
 };
 
+function selectHero(hero, options = {}) {
+  if (!heroProfiles[hero]) {
+    return;
+  }
+
+  selectedHero = hero;
+  localStorage.setItem(storageKeys.hero, hero);
+  document.body.dataset.hero = hero;
+
+  heroButtons.forEach((button) => {
+    const isActive = button.dataset.hero === hero;
+    button.classList.toggle('active', isActive);
+    button.setAttribute('aria-pressed', String(isActive));
+  });
+
+  if (heroBadge) {
+    heroBadge.textContent = `Heroi: ${heroProfiles[hero].name}`;
+  }
+
+  if (!options.silent) {
+    setStatus(`${heroProfiles[hero].name} selecionado.`);
+  }
+}
+
 tabButtons.forEach((button) => {
-  button.addEventListener("click", () => selectGame(button.dataset.game));
+  button.addEventListener('click', () => selectGame(button.dataset.game));
 });
 
 cardButtons.forEach((button) => {
-  button.addEventListener("click", () => selectGame(button.dataset.game));
+  button.addEventListener('click', () => selectGame(button.dataset.game));
 });
 
-primaryAction.addEventListener("click", () => {
+heroButtons.forEach((button) => {
+  button.addEventListener('click', () => selectHero(button.dataset.hero));
+});
+
+primaryAction.addEventListener('click', () => {
   games[currentGame].start();
 });
 
-selectGame("reflex");
+selectHero(selectedHero, { silent: true });
+selectGame('reflex');
