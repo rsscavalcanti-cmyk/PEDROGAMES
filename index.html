@@ -1,158 +1,226 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang='pt-BR'>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
   <title>PEDROGAMES</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel='stylesheet' href='styles.css'>
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="#top" aria-label="PEDROGAMES inicio">
-      <span class="brand-mark" aria-hidden="true">PG</span>
-      <span class="brand-copy">
+  <header class='topbar'>
+    <a class='brand' href='#top' aria-label='PEDROGAMES inicio'>
+      <span class='brand-mark' aria-hidden='true'>PG</span>
+      <span class='brand-copy'>
         <span>PEDROGAMES</span>
         <span>Manga Arcade</span>
       </span>
     </a>
-    <nav class="nav" aria-label="Navegacao principal">
-      <a href="#arcade">Jogar</a>
-      <a href="#biblioteca">Biblioteca</a>
-      <a href="#ranking">Ranking</a>
+    <nav class='nav' aria-label='Navegacao principal'>
+      <a href='#arcade'>Jogar</a>
+      <a href='#herois'>Herois</a>
+      <a href='#biblioteca'>Biblioteca</a>
+      <a href='#ranking'>Ranking</a>
     </nav>
   </header>
 
-  <main id="top">
-    <section class="stage" aria-labelledby="page-title">
-      <div class="intro">
-        <div class="manga-hero-art" aria-hidden="true">
-          <span class="burst"></span>
-          <span class="panel panel-a"></span>
-          <span class="panel panel-b"></span>
-          <span class="panel panel-c"></span>
-          <span class="speed-line line-a"></span>
-          <span class="speed-line line-b"></span>
-          <span class="speed-line line-c"></span>
-          <span class="hero-disc"></span>
-          <span class="hero-eye eye-left"></span>
-          <span class="hero-eye eye-right"></span>
-          <span class="hero-scar"></span>
-          <span class="sfx sfx-top">ZAP!</span>
-          <span class="sfx sfx-bottom">GO!</span>
+  <main id='top'>
+    <section class='stage' aria-labelledby='page-title'>
+      <div class='intro'>
+        <div class='manga-hero-art' aria-hidden='true'>
+          <span class='burst'></span>
+          <span class='panel panel-a'></span>
+          <span class='panel panel-b'></span>
+          <span class='panel panel-c'></span>
+          <span class='speed-line line-a'></span>
+          <span class='speed-line line-b'></span>
+          <span class='speed-line line-c'></span>
+          <span class='hero-disc'></span>
+          <span class='hero-eye eye-left'></span>
+          <span class='hero-eye eye-right'></span>
+          <span class='hero-scar'></span>
+          <span class='sfx sfx-top'>ZAP!</span>
+          <span class='sfx sfx-bottom'>GO!</span>
         </div>
 
-        <p class="eyebrow">Manga arcade</p>
-        <h1 id="page-title">PEDROGAMES</h1>
-        <p class="lead">Um fliperama de jogos rapidos com energia de quadrinho japones, placares locais e partidas de poucos minutos.</p>
-        <div class="actions">
-          <a class="primary-action" href="#arcade">Abrir fliperama</a>
-          <a class="secondary-action" href="#biblioteca">Ver jogos</a>
+        <p class='eyebrow'>Manga arcade</p>
+        <h1 id='page-title'>PEDROGAMES</h1>
+        <p class='lead'>Um fliperama de jogos rapidos com energia de quadrinho japones, agora com herois originais inspirados nas fotos, videos e poses da pasta PEDROGAMES.</p>
+        <div class='actions'>
+          <a class='primary-action' href='#arcade'>Abrir fliperama</a>
+          <a class='secondary-action' href='#herois'>Conhecer herois</a>
         </div>
       </div>
 
-      <section class="arcade" id="arcade" aria-labelledby="arcade-title">
-        <div class="panel-head">
+      <section class='arcade' id='arcade' aria-labelledby='arcade-title'>
+        <div class='panel-head'>
           <div>
-            <p class="eyebrow">Jogo atual</p>
-            <h2 id="arcade-title">Reflexo Turbo</h2>
+            <p class='eyebrow'>Jogo atual</p>
+            <h2 id='arcade-title'>Reflexo Turbo</h2>
+            <p class='active-hero' id='heroBadge'>Heroi: Pedro Raio</p>
           </div>
-          <button class="start-button" type="button" id="primaryAction">Iniciar</button>
+          <button class='start-button' type='button' id='primaryAction'>Iniciar</button>
         </div>
 
-        <div class="game-tabs" role="tablist" aria-label="Jogos do PEDROGAMES">
-          <button class="tab-button active" type="button" data-game="reflex">Reflexo</button>
-          <button class="tab-button" type="button" data-game="memory">Memoria</button>
-          <button class="tab-button" type="button" data-game="dash">Meteoro</button>
+        <div class='game-tabs' role='tablist' aria-label='Jogos do PEDROGAMES'>
+          <button class='tab-button active' type='button' data-game='reflex'>Reflexo</button>
+          <button class='tab-button' type='button' data-game='memory'>Memoria</button>
+          <button class='tab-button' type='button' data-game='dash'>Meteoro</button>
         </div>
 
-        <div class="scorebar" aria-live="polite">
-          <span id="metricOneLabel">Tempo: <strong id="metricOne">20</strong>s</span>
-          <span id="metricTwoLabel">Pontos: <strong id="metricTwo">0</strong></span>
-          <span>Recorde: <strong id="bestScore">0</strong></span>
+        <div class='scorebar' aria-live='polite'>
+          <span id='metricOneLabel'>Tempo: <strong id='metricOne'>20</strong>s</span>
+          <span id='metricTwoLabel'>Pontos: <strong id='metricTwo'>0</strong></span>
+          <span>Recorde: <strong id='bestScore'>0</strong></span>
         </div>
 
-        <div class="play-area">
-          <div class="game-screen active" id="reflexGame" data-screen="reflex">
-            <div class="reflex-grid" id="reflexGrid" aria-label="Tabuleiro do jogo Reflexo Turbo"></div>
+        <div class='play-area'>
+          <div class='game-screen active' id='reflexGame' data-screen='reflex'>
+            <div class='reflex-grid' id='reflexGrid' aria-label='Tabuleiro do jogo Reflexo Turbo'></div>
           </div>
 
-          <div class="game-screen" id="memoryGame" data-screen="memory" hidden>
-            <div class="memory-grid" id="memoryGrid" aria-label="Tabuleiro do jogo Memoria Pixel"></div>
+          <div class='game-screen' id='memoryGame' data-screen='memory' hidden>
+            <div class='memory-grid' id='memoryGrid' aria-label='Tabuleiro do jogo Memoria Pixel'></div>
           </div>
 
-          <div class="game-screen" id="dashGame" data-screen="dash" hidden>
-            <canvas id="dashCanvas" width="640" height="420" aria-label="Meteoro Dash"></canvas>
-            <div class="dash-controls" aria-label="Controles do Meteoro Dash">
-              <button type="button" data-move="left">Esq</button>
-              <button type="button" data-move="right">Dir</button>
+          <div class='game-screen' id='dashGame' data-screen='dash' hidden>
+            <canvas id='dashCanvas' width='640' height='420' aria-label='Meteoro Dash'></canvas>
+            <div class='dash-controls' aria-label='Controles do Meteoro Dash'>
+              <button type='button' data-move='left'>Esq</button>
+              <button type='button' data-move='right'>Dir</button>
             </div>
           </div>
         </div>
 
-        <p class="game-status" id="gameStatus">Pronto para jogar.</p>
+        <p class='game-status' id='gameStatus'>Pronto para jogar.</p>
       </section>
     </section>
 
-    <section class="games" id="biblioteca" aria-labelledby="games-title">
-      <div class="section-title">
-        <p class="eyebrow">Biblioteca</p>
-        <h2 id="games-title">Jogos disponiveis</h2>
+    <section class='heroes' id='herois' aria-labelledby='heroes-title'>
+      <div class='section-title'>
+        <p class='eyebrow'>Elenco do Drive</p>
+        <h2 id='heroes-title'>Herois manga</h2>
       </div>
 
-      <div class="game-list">
-        <article class="game-card">
-          <button class="game-card-action" type="button" data-game="reflex">
-            <span class="game-art reflex-art" aria-hidden="true">
+      <div class='hero-layout'>
+        <article class='character-card pedro-card'>
+          <div class='hero-portrait-wrap'>
+            <img class='hero-portrait' src='assets/pedro-manga.svg' alt='Ilustracao manga do personagem Pedro Raio'>
+          </div>
+          <div class='hero-copy'>
+            <p class='eyebrow'>Protagonista de velocidade</p>
+            <h3>Pedro Raio</h3>
+            <p>Inspirado na camiseta vermelha, na pose de aventura e na energia de quem aponta o caminho da proxima fase.</p>
+            <div class='power-list' aria-label='Poderes do Pedro Raio'>
+              <span>Reflexo turbo</span>
+              <span>Combo de acao</span>
+              <span>Modo lider</span>
+            </div>
+            <div class='source-tags' aria-label='Referencias usadas para Pedro'>
+              <span>camiseta vermelha</span>
+              <span>pose no lago</span>
+              <span>ritmo de video</span>
+            </div>
+            <button class='hero-pick active' type='button' data-hero='pedro' aria-pressed='true'>Escolher Pedro</button>
+          </div>
+        </article>
+
+        <article class='character-card arthur-card'>
+          <div class='hero-portrait-wrap'>
+            <img class='hero-portrait' src='assets/arthur-manga.svg' alt='Ilustracao manga do personagem Arthur Escudo'>
+          </div>
+          <div class='hero-copy'>
+            <p class='eyebrow'>Guardiao da imaginacao</p>
+            <h3>Arthur Escudo</h3>
+            <p>Inspirado no cabelo cacheado, no moletom verde e naquele olhar curioso de personagem que descobre poderes novos.</p>
+            <div class='power-list' aria-label='Poderes do Arthur Escudo'>
+              <span>Escudo verde</span>
+              <span>Memoria magica</span>
+              <span>Energia extra</span>
+            </div>
+            <div class='source-tags' aria-label='Referencias usadas para Arthur'>
+              <span>cabelo cacheado</span>
+              <span>moletom verde</span>
+              <span>clima de equipe</span>
+            </div>
+            <button class='hero-pick' type='button' data-hero='arthur' aria-pressed='false'>Escolher Arthur</button>
+          </div>
+        </article>
+      </div>
+
+      <div class='drive-lab' aria-label='Como as midias do Drive viram jogo'>
+        <div class='lab-head'>
+          <p class='eyebrow'>Drive Lab</p>
+          <h3>Fotos, video e jogo conversando</h3>
+        </div>
+        <div class='lab-track'>
+          <span class='lab-panel'><strong>Foto familia</strong><small>Base para carinho, equipe e dupla de protagonistas.</small></span>
+          <span class='lab-panel'><strong>Foto aventura</strong><small>Pose, vermelho forte, lago e cidade viraram acao.</small></span>
+          <span class='lab-panel'><strong>Retrato gamer</strong><small>Olhar, cabelo e detalhes viraram expressao manga.</small></span>
+          <span class='lab-panel'><strong>Video</strong><small>Movimento vira animacao, dash e cortes de quadrinho.</small></span>
+        </div>
+      </div>
+    </section>
+
+    <section class='games' id='biblioteca' aria-labelledby='games-title'>
+      <div class='section-title'>
+        <p class='eyebrow'>Biblioteca</p>
+        <h2 id='games-title'>Jogos disponiveis</h2>
+      </div>
+
+      <div class='game-list'>
+        <article class='game-card'>
+          <button class='game-card-action' type='button' data-game='reflex'>
+            <span class='game-art reflex-art' aria-hidden='true'>
               <span></span><span></span><span></span><span></span>
             </span>
-            <span class="game-card-title">Reflexo Turbo</span>
-            <span class="game-card-copy">Acerte os quadrados acesos e empilhe pontos em 20 segundos.</span>
-            <span class="tag live">Jogavel</span>
+            <span class='game-card-title'>Reflexo Turbo</span>
+            <span class='game-card-copy'>Treine cliques rapidos com a energia do Pedro Raio e empilhe pontos em 20 segundos.</span>
+            <span class='tag live'>Jogavel</span>
           </button>
         </article>
 
-        <article class="game-card">
-          <button class="game-card-action" type="button" data-game="memory">
-            <span class="game-art memory-art" aria-hidden="true">
+        <article class='game-card'>
+          <button class='game-card-action' type='button' data-game='memory'>
+            <span class='game-art memory-art' aria-hidden='true'>
               <span>A</span><span>B</span><span>C</span><span>D</span>
             </span>
-            <span class="game-card-title">Memoria Pixel</span>
-            <span class="game-card-copy">Encontre os pares com poucos movimentos e finalize rapido.</span>
-            <span class="tag live">Jogavel</span>
+            <span class='game-card-title'>Memoria Pixel</span>
+            <span class='game-card-copy'>Encontre pares com poucos movimentos usando o foco do Arthur Escudo.</span>
+            <span class='tag live'>Jogavel</span>
           </button>
         </article>
 
-        <article class="game-card">
-          <button class="game-card-action" type="button" data-game="dash">
-            <span class="game-art dash-art" aria-hidden="true">
+        <article class='game-card'>
+          <button class='game-card-action' type='button' data-game='dash'>
+            <span class='game-art dash-art' aria-hidden='true'>
               <span></span><span></span><span></span><span></span>
             </span>
-            <span class="game-card-title">Meteoro Dash</span>
-            <span class="game-card-copy">Desvie dos meteoros, pegue energia e segure a partida.</span>
-            <span class="tag live">Jogavel</span>
+            <span class='game-card-title'>Meteoro Dash</span>
+            <span class='game-card-copy'>Escolha o heroi, desvie dos meteoros e pegue energia para segurar a partida.</span>
+            <span class='tag live'>Jogavel</span>
           </button>
         </article>
       </div>
     </section>
 
-    <section class="ranking" id="ranking" aria-labelledby="ranking-title">
-      <div class="section-title">
-        <p class="eyebrow">Placar</p>
-        <h2 id="ranking-title">Recordes locais</h2>
+    <section class='ranking' id='ranking' aria-labelledby='ranking-title'>
+      <div class='section-title'>
+        <p class='eyebrow'>Placar</p>
+        <h2 id='ranking-title'>Recordes locais</h2>
       </div>
-      <ol class="ranking-list">
-        <li><span>Reflexo Turbo</span><strong id="rankReflex">0</strong></li>
-        <li><span>Memoria Pixel</span><strong id="rankMemory">0</strong></li>
-        <li><span>Meteoro Dash</span><strong id="rankDash">0</strong></li>
+      <ol class='ranking-list'>
+        <li><span>Reflexo Turbo</span><strong id='rankReflex'>0</strong></li>
+        <li><span>Memoria Pixel</span><strong id='rankMemory'>0</strong></li>
+        <li><span>Meteoro Dash</span><strong id='rankDash'>0</strong></li>
       </ol>
     </section>
   </main>
 
-  <footer class="footer">
+  <footer class='footer'>
     <span>PEDROGAMES</span>
-    <a href="https://github.com/rsscavalcanti-cmyk/PEDROGAMES">Repositorio no GitHub</a>
+    <a href='https://github.com/rsscavalcanti-cmyk/PEDROGAMES'>Repositorio no GitHub</a>
   </footer>
 
-  <script src="script.js"></script>
+  <script src='script.js'></script>
 </body>
 </html>
