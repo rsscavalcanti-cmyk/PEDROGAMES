@@ -13,8 +13,8 @@
       <span>PEDROGAMES</span>
     </a>
     <nav class="nav" aria-label="Navegacao principal">
-      <a href="#demo">Demo</a>
-      <a href="#jogos">Jogos</a>
+      <a href="#arcade">Jogar</a>
+      <a href="#biblioteca">Biblioteca</a>
       <a href="#ranking">Ranking</a>
     </nav>
   </header>
@@ -22,67 +22,96 @@
   <main id="top">
     <section class="stage" aria-labelledby="page-title">
       <div class="intro">
-        <p class="eyebrow">Novo hub de jogos</p>
+        <p class="eyebrow">Arcade online</p>
         <h1 id="page-title">PEDROGAMES</h1>
-        <p class="lead">Um espaco para jogos rapidos, desafios de reflexo e placares da turma.</p>
+        <p class="lead">Um fliperama de jogos rapidos com desafios de reflexo, memoria e desvio.</p>
         <div class="actions">
-          <a class="primary-action" href="#demo">Jogar agora</a>
-          <a class="secondary-action" href="#jogos">Ver jogos</a>
+          <a class="primary-action" href="#arcade">Abrir fliperama</a>
+          <a class="secondary-action" href="#biblioteca">Ver jogos</a>
         </div>
       </div>
 
-      <section class="arcade" id="demo" aria-labelledby="demo-title">
+      <section class="arcade" id="arcade" aria-labelledby="arcade-title">
         <div class="panel-head">
           <div>
-            <p class="eyebrow">Demo jogavel</p>
-            <h2 id="demo-title">Reflexo Turbo</h2>
+            <p class="eyebrow">Jogo atual</p>
+            <h2 id="arcade-title">Reflexo Turbo</h2>
           </div>
-          <button class="start-button" type="button" id="startGame">Iniciar</button>
+          <button class="start-button" type="button" id="primaryAction">Iniciar</button>
+        </div>
+
+        <div class="game-tabs" role="tablist" aria-label="Jogos do PEDROGAMES">
+          <button class="tab-button active" type="button" data-game="reflex">Reflexo</button>
+          <button class="tab-button" type="button" data-game="memory">Memoria</button>
+          <button class="tab-button" type="button" data-game="dash">Meteoro</button>
         </div>
 
         <div class="scorebar" aria-live="polite">
-          <span>Tempo: <strong id="timeLeft">20</strong>s</span>
-          <span>Pontos: <strong id="score">0</strong></span>
+          <span id="metricOneLabel">Tempo: <strong id="metricOne">20</strong>s</span>
+          <span id="metricTwoLabel">Pontos: <strong id="metricTwo">0</strong></span>
           <span>Recorde: <strong id="bestScore">0</strong></span>
         </div>
 
-        <div class="game-grid" id="gameGrid" aria-label="Tabuleiro do jogo Reflexo Turbo"></div>
-        <p class="game-status" id="gameStatus">Clique em Iniciar e acerte os quadrados acesos.</p>
+        <div class="play-area">
+          <div class="game-screen active" id="reflexGame" data-screen="reflex">
+            <div class="reflex-grid" id="reflexGrid" aria-label="Tabuleiro do jogo Reflexo Turbo"></div>
+          </div>
+
+          <div class="game-screen" id="memoryGame" data-screen="memory" hidden>
+            <div class="memory-grid" id="memoryGrid" aria-label="Tabuleiro do jogo Memoria Pixel"></div>
+          </div>
+
+          <div class="game-screen" id="dashGame" data-screen="dash" hidden>
+            <canvas id="dashCanvas" width="640" height="420" aria-label="Meteoro Dash"></canvas>
+            <div class="dash-controls" aria-label="Controles do Meteoro Dash">
+              <button type="button" data-move="left">Esq</button>
+              <button type="button" data-move="right">Dir</button>
+            </div>
+          </div>
+        </div>
+
+        <p class="game-status" id="gameStatus">Pronto para jogar.</p>
       </section>
     </section>
 
-    <section class="games" id="jogos" aria-labelledby="games-title">
+    <section class="games" id="biblioteca" aria-labelledby="games-title">
       <div class="section-title">
         <p class="eyebrow">Biblioteca</p>
-        <h2 id="games-title">Jogos em destaque</h2>
+        <h2 id="games-title">Jogos disponiveis</h2>
       </div>
 
       <div class="game-list">
         <article class="game-card">
-          <div class="game-art maze" aria-hidden="true">
-            <span></span><span></span><span></span><span></span>
-          </div>
-          <h3>Labirinto Neon</h3>
-          <p>Desvie dos blocos e encontre a saida antes do tempo acabar.</p>
-          <span class="tag">Em breve</span>
+          <button class="game-card-action" type="button" data-game="reflex">
+            <span class="game-art reflex-art" aria-hidden="true">
+              <span></span><span></span><span></span><span></span>
+            </span>
+            <span class="game-card-title">Reflexo Turbo</span>
+            <span class="game-card-copy">Acerte os quadrados acesos e empilhe pontos em 20 segundos.</span>
+            <span class="tag live">Jogavel</span>
+          </button>
         </article>
 
         <article class="game-card">
-          <div class="game-art race" aria-hidden="true">
-            <span></span><span></span><span></span>
-          </div>
-          <h3>Corrida Pixel</h3>
-          <p>Acelere, freie na hora certa e tente bater o melhor tempo.</p>
-          <span class="tag live">Planejado</span>
+          <button class="game-card-action" type="button" data-game="memory">
+            <span class="game-art memory-art" aria-hidden="true">
+              <span>A</span><span>B</span><span>C</span><span>D</span>
+            </span>
+            <span class="game-card-title">Memoria Pixel</span>
+            <span class="game-card-copy">Encontre os pares com poucos movimentos e finalize rapido.</span>
+            <span class="tag live">Jogavel</span>
+          </button>
         </article>
 
         <article class="game-card">
-          <div class="game-art tower" aria-hidden="true">
-            <span></span><span></span><span></span><span></span>
-          </div>
-          <h3>Guardiao da Torre</h3>
-          <p>Proteja sua base com estrategia e upgrades a cada rodada.</p>
-          <span class="tag">Em breve</span>
+          <button class="game-card-action" type="button" data-game="dash">
+            <span class="game-art dash-art" aria-hidden="true">
+              <span></span><span></span><span></span><span></span>
+            </span>
+            <span class="game-card-title">Meteoro Dash</span>
+            <span class="game-card-copy">Desvie dos meteoros, pegue energia e segure a partida.</span>
+            <span class="tag live">Jogavel</span>
+          </button>
         </article>
       </div>
     </section>
@@ -90,12 +119,12 @@
     <section class="ranking" id="ranking" aria-labelledby="ranking-title">
       <div class="section-title">
         <p class="eyebrow">Placar</p>
-        <h2 id="ranking-title">Ranking local</h2>
+        <h2 id="ranking-title">Recordes locais</h2>
       </div>
       <ol class="ranking-list">
-        <li><span>Pedro</span><strong>1200</strong></li>
-        <li><span>Convidado</span><strong>850</strong></li>
-        <li><span>Voce</span><strong id="rankingScore">0</strong></li>
+        <li><span>Reflexo Turbo</span><strong id="rankReflex">0</strong></li>
+        <li><span>Memoria Pixel</span><strong id="rankMemory">0</strong></li>
+        <li><span>Meteoro Dash</span><strong id="rankDash">0</strong></li>
       </ol>
     </section>
   </main>
